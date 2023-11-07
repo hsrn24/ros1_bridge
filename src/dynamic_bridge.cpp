@@ -154,6 +154,10 @@ void update_bridge(
       if (!bridge_all_1to2_topics) {
         continue;
       }
+    if(topic_name == '/clock')
+    {
+      continue;
+    }
       // update the ROS 2 type name to be that of the anticipated bridged type
       // TODO(dhood): support non 1-1 "bridge-all" mappings
       bool mapping_found = ros1_bridge::get_1to2_mapping(ros1_type_name, ros2_type_name);
