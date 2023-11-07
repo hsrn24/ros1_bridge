@@ -154,7 +154,7 @@ void update_bridge(
       if (!bridge_all_1to2_topics) {
         continue;
       }
-    if(topic_name == '/clock')
+    if(topic_name == "/clock")
     {
       continue;
     }
