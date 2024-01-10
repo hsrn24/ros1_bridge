@@ -188,6 +188,17 @@ void update_bridge(
       ros2_publisher_qos.keep_all();
       ros2_publisher_qos.transient_local();
     }
+
+    /*
+    Adds latching to the current_trajectory topic
+    It prevents the situation where the topic is published on the ros1 side and the nodes on the ros2 side aren't initialized yet, 
+    so the first message is not visible to them
+    */ 
+    if (topic_name == "/robo_cart/cartographer_robo_cart_node/current_trajectory") {
+      ros2_publisher_qos.keep_all();
+      ros2_publisher_qos.transient_local();
+    }
+
     try {
       bridge.bridge_handles = ros1_bridge::create_bridge_from_1_to_2(
         ros1_node, ros2_node,
