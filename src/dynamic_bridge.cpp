@@ -184,17 +184,15 @@ void update_bridge(
     bridge.ros2_type_name = ros2_type_name;
 
     auto ros2_publisher_qos = rclcpp::QoS(rclcpp::KeepLast(10));
-    if (topic_name == "/tf_static") {
-      ros2_publisher_qos.keep_all();
-      ros2_publisher_qos.transient_local();
-    }
-
+    
     /*
-    Adds latching to the current_trajectory topic
-    It prevents the situation where the topic is published on the ros1 side and the nodes on the ros2 side aren't initialized yet, 
-    so the first message is not visible to them
+      Add latching policy for a specified topics.
+      It prevents the situation where the topic is published on the ROS1 side and the nodes on the ROS2 side aren't initialized yet, 
+      so the first message is not visible to them.
     */ 
-    if (topic_name == "/robo_cart/cartographer_robo_cart_node/current_trajectory") {
+    std::set<std::string> latched_topics = {"/tf_static", "/robo_cart/cartographer_robo_cart_node/current_trajectory", "/robo_cart/loop_mode_enabled"};
+
+    if (latched_topics.count(topic_name) > 0) {
       ros2_publisher_qos.keep_all();
       ros2_publisher_qos.transient_local();
     }
