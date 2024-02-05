@@ -190,7 +190,12 @@ void update_bridge(
       It prevents the situation where the topic is published on the ROS1 side and the nodes on the ROS2 side aren't initialized yet, 
       so the first message is not visible to them.
     */ 
-    std::set<std::string> latched_topics = {"/tf_static", "/robo_cart/cartographer_robo_cart_node/current_trajectory", "/robo_cart/loop_mode_enabled"};
+    std::set<std::string> latched_topics = {
+      "/tf_static",
+      "/robo_cart/cartographer_robo_cart_node/current_trajectory",
+      "/robo_cart/cartographer_robo_cart_node/slam_ready"
+      "/robo_cart/loop_mode_enabled",
+    };
 
     if (latched_topics.count(topic_name) > 0) {
       ros2_publisher_qos.keep_all();
