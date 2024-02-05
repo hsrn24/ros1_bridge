@@ -193,7 +193,7 @@ void update_bridge(
     std::set<std::string> latched_topics = {
       "/tf_static",
       "/robo_cart/cartographer_robo_cart_node/current_trajectory",
-      "/robo_cart/cartographer_robo_cart_node/slam_ready"
+      "/robo_cart/cartographer_robo_cart_node/slam_ready",
       "/robo_cart/loop_mode_enabled",
     };
 
