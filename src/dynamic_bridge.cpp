@@ -186,7 +186,7 @@ void update_bridge(
     auto ros2_publisher_qos = rclcpp::QoS(rclcpp::KeepLast(10));
     
     /*
-      Add latching policy for a specified topics.
+      Add latching policy for a specified topics publishers.
       It prevents the situation where the topic is published on the ROS1 side and the nodes on the ROS2 side aren't initialized yet, 
       so the first message is not visible to them.
     */ 
@@ -272,7 +272,18 @@ void update_bridge(
 
     auto ros2_subscriber_qos = rclcpp::QoS(rclcpp::KeepLast(10));
     auto ros_publisher_latch = false;
-    if (topic_name == "/tf_static") {
+
+    /*
+      Add latching policy for a specified topics subscribers.
+      It prevents the situation where the topic is published on the ROS1 side and the nodes on the ROS2 side aren't initialized yet, 
+      so the first message is not visible to them.
+    */ 
+    std::set<std::string> latched_topics = {
+      "/tf_static",
+      "/robo_cart/cart_ready",
+    };
+
+    if (latched_topics.count(topic_name) > 0) {
       ros2_subscriber_qos.keep_all();
       ros2_subscriber_qos.transient_local();
       ros2_subscriber_qos.reliable();
