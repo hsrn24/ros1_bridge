@@ -195,6 +195,8 @@ void update_bridge(
       "/robo_cart/cartographer_robo_cart_node/current_trajectory",
       "/robo_cart/cartographer_robo_cart_node/slam_ready",
       "/robo_cart/loop_mode_enabled",
+      "/robo_cart/cart_ready",
+      "/robo_cart/alarm",
     };
 
     if (latched_topics.count(topic_name) > 0) {
