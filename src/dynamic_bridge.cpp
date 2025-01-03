@@ -281,6 +281,13 @@ void update_bridge(
     std::set<std::string> latched_topics = {
       "/tf_static",
       "/robo_cart/cart_ready",
+      "/robo_cart/alarm_manager/active_alarms",
+      "/robo_cart/autonomy_status",
+      "/robo_cart/destinations_keeper/destinations",
+      "/robo_cart/is_mapping_mode_set",
+      "/robo_cart/is_ready_to_save_map",
+      "/robo_cart/loop_mode_status",
+      "/robo_cart/next_destination_id",
     };
 
     if (latched_topics.count(topic_name) > 0) {
