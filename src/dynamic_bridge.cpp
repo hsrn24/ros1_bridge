@@ -287,7 +287,6 @@ void update_bridge(
       "/robo_cart/is_mapping_mode_set",
       "/robo_cart/is_ready_to_save_map",
       "/robo_cart/loop_mode_status",
-      "/robo_cart/next_destination_id",
     };
 
     if (latched_topics.count(topic_name) > 0) {
