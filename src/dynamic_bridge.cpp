@@ -751,8 +751,22 @@ int main(int argc, char * argv[])
         if (pair.first == ros2_node->get_name() && pair.second == ros2_node->get_namespace()) {
           continue;
         }
-        std::map<std::string, std::vector<std::string>> services_and_types =
-          ros2_node->get_service_names_and_types_by_node(pair.first, pair.second);
+        std::map<std::string, std::vector<std::string>> services_and_types;
+        try
+        {
+        services_and_types = ros2_node->get_service_names_and_types_by_node(pair.first, pair.second);        
+        }
+        catch(const std::runtime_error& e)
+        {
+          fprintf(
+              stderr,
+              "warning: Failed to get service names and types for node: '%s' with namespace: %s, due to error: %s. The node will be skipped \n",
+              pair.first.c_str(),
+              pair.second.c_str(),
+              e.what()
+            );
+            continue;
+        }
         for (auto & it : services_and_types) {
           service_names.insert(it.first);
         }
