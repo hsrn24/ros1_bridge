@@ -754,7 +754,7 @@ int main(int argc, char * argv[])
         std::map<std::string, std::vector<std::string>> services_and_types;
         try
         {
-        services_and_types = ros2_node->get_service_names_and_types_by_node(pair.first, pair.second);        
+          services_and_types = ros2_node->get_service_names_and_types_by_node(pair.first, pair.second);        
         }
         catch(const std::runtime_error& e)
         {
